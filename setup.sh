@@ -2,7 +2,7 @@
 
 light_install="https://raw.githubusercontent.com/f5nodes/celestia/main/light_install.sh"
 full_install="https://raw.githubusercontent.com/f5nodes/celestia/main/full_install.sh"
-bridge_install="https://raw.githubusercontent.com/f5nodes/celestia/main/bridgeinstall.sh"
+bridge_install="https://raw.githubusercontent.com/f5nodes/celestia/main/bridge_install.sh"
 
 PS3='Enter your option: '
 options=("Install the light node" "Install the full node" "Install the bridge node" "Quit")

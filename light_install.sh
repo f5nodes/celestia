@@ -1,5 +1,13 @@
 #!/bin/bash
 
+read -p "Do you want to enable sending metrics to localhost:4318 (celestia-collector endpoint)? (y/n): " enable_metrics
+
+if [ "$enable_metrics" = "y" ]; then
+    metrics_flags="--metrics --metrics.endpoint localhost:4318 --metrics.tls=false"
+else
+    metrics_flags=""
+fi
+
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget aria2 clang pkg-config libssl-dev jq build-essential \
 git make ncdu -y
@@ -33,10 +41,14 @@ After=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$(which celestia) light start --keyring.accname my_celes_key --metrics --metrics.endpoint localhost:4318 --metrics.tls=false
+ExecStart=$(which celestia) light start --keyring.accname my_celes_key $metrics_flags
 Restart=on-failure
 RestartSec=3
 
 [Install]
 WantedBy=multi-user.target
 EOF
+
+sudo systemctl enable celestia-lightd
+sudo systemctl daemon-reload
+sudo systemctl start celestia-lightd && journalctl -u celestia-lightd -o cat -f

@@ -8,7 +8,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget aria2 clang pkg-config libssl-dev jq build-essential \
 git make ncdu -y
 
-ver="1.21.1"
+ver="1.23.0"
 cd $HOME
 wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
@@ -22,7 +22,7 @@ cd $HOME
 rm -rf celestia-node
 git clone https://github.com/celestiaorg/celestia-node.git
 cd celestia-node/
-git checkout tags/v0.12.4
+git checkout tags/v0.21.5
 make build
 make install
 make cel-key
